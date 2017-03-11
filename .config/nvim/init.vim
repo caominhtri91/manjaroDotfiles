@@ -24,8 +24,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'mileszs/ack.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
 
 " Initialize plugin system
 call plug#end()
@@ -65,11 +65,13 @@ set clipboard=unnamedplus
 " line number
 set nu
 set relativenumber
+set nohlsearch
+set so=5
 
 " auto indent
 set autoindent
 set si "smart indent
-inoremap { {<CR>}<up><end><CR>
+imap jj <Esc>
 
 " syntax
 syntax on
@@ -81,8 +83,8 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" Map Esc to jj
-:imap jj <Esc>
+" Map Esc to ctrl c
+vnoremap <C-c> <Esc>
 
 " Move between windows
 map <C-j> <C-W>j
