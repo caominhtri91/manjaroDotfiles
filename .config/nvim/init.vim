@@ -104,3 +104,6 @@ filetype plugin indent on
 set tabstop=4
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
+
+" Turn off space after curly brace
+let g:AutoPairsMapSpace=0
