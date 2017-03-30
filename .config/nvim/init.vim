@@ -6,8 +6,13 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" ranger
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 " deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'lfilho/cosco.vim'
 
 " javascript plug
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
@@ -22,6 +27,10 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'wellle/targets.vim'
+Plug 'thinca/vim-textobj-function-javascript'
+Plug 'gaving/vim-textobj-argument'
+Plug 'scrooloose/nerdtree'
 
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -47,6 +56,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Set colorscheme
 colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
 let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -81,7 +91,9 @@ let mapleader = "," " map leader key to ,
 let g:mapleader = ","
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nmap <leader>w :w!<CR>
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
 
 " Map Esc to ctrl c
 vnoremap <C-c> <Esc>
@@ -101,9 +113,38 @@ let g:ackprg = 'ag --vimgrep'
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
-set tabstop=4
+set tabstop=2
 " when indenting with '>', use 4 spaces width
-set shiftwidth=4
+set shiftwidth=2
 
 " Turn off space after curly brace
 let g:AutoPairsMapSpace=0
+
+" Auto semicolon or colon
+autocmd FileType javascript,css nmap <silent> z; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css imap <silent> z; <c-o><Plug>(cosco-commaOrSemiColon)
+
+" Insert new line when in insert mode
+imap <leader>n <ESC>o
+imap <leader>N <ESC>O
+" Insert new line when in normal mode but not go to insert mode
+nnoremap <silent><A-k> O<Esc>j
+nnoremap <silent><A-j> o<Esc>k
+
+" Config ranger
+let g:ranger_map_keys = 0
+map <leader>f :RangerNewTab<CR>
+
+" Config netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+
+"Config nerdtree
+map <leader>t :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeQuitOnOpen=1
+
+" Delete all other hidden buffer
+autocmd BufEnter * setlocal bufhidden=delete
